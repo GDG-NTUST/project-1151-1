@@ -2,15 +2,7 @@
 
 ## Team Name
 
-TODO：填寫你們的隊名
-
-## Slogan
-
-TODO：填寫一句隊呼
-
-## Introduction
-
-TODO：用兩到三句話介紹你們這一組
+TODO：填寫你們的組名
 
 ## Members
 

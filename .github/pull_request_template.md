@@ -2,13 +2,13 @@
 
 請在每一項完成後打勾：
 
-- [ ] 已填寫 `## Team Name`（隊名）
-- [ ] 已填寫 `## Slogan`（隊呼）
-- [ ] 已填寫 `## Introduction`（隊伍介紹）
-- [ ] `## Members` 中列出了所有組員的檔案名稱
-- [ ] 每位組員的 `data/members/<名字>.md` 都已建立並填寫
+- [ ] 已建立 `data/members/<你的英文名>.md` 並填寫完成
+- [ ] `## Emoji` 已填入一個 emoji
+- [ ] `## Department` 已填寫系級
+- [ ] `## Bio` 已填寫自我介紹
+- [ ] `## Interests` 已列出興趣
+- [ ] `## GitHub` 已填寫 GitHub 帳號
 - [ ] 檔案中沒有殘留 Git 衝突標記（`<<<<<<<`、`=======`、`>>>>>>>`）
-- [ ] 已在本機執行 `node scripts/build.mjs`，確認網頁正常顯示
 
 ## 修改了哪些檔案？
 

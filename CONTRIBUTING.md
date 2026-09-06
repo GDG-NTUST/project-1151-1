@@ -4,12 +4,12 @@
 
 學員只需要編輯 `data/` 底下的 Markdown 檔案：
 
-- **個人資料**：`data/members/<你的英文名>.md`
-- **隊伍資料**：`data/teams/team-<代號>/team.md`
+- **個人卡片**：`data/members/<你的英文名>.md`
+- **小組資料**：`data/teams/team-<代號>/team.md`（由組長負責）
 
 不需要修改任何 HTML、CSS 或 JavaScript 檔案。
 
-## 個人資料檔格式
+## 個人卡片格式
 
 檔案位置：`data/members/<你的英文名>.md`
 
@@ -23,26 +23,56 @@
 ```markdown
 # 王小明
 
-## 系所
+## Emoji
 
-資訊工程學系
+🚀
 
-## 年級
+## Department
 
-三年級
+資訊工程學系三年級
 
-## 興趣
+## Bio
 
-Web 開發 / 機器學習
+白天寫 code，晚上打遊戲的快樂大學生
+
+## Interests
+
+- Web 開發
+- 機器學習
+- 咖啡
 
 ## GitHub
 
 xiaoming-wang
 ```
 
-## 隊伍資料檔格式
+### 各欄位說明
 
-檔案位置：`data/teams/team-<代號>/team.md`
+| 欄位 | 說明 | 範例 |
+|------|------|------|
+| `# 標題` | 你的名字 | `# 王小明` |
+| `## Emoji` | 選一個代表你的 emoji | `🚀`、`🐱`、`☕` |
+| `## Department` | 你的系級 | `資工系三年級` |
+| `## Bio` | 一句話介紹自己 | `熱愛開源的大學生` |
+| `## Interests` | 興趣或技能，一行一個 | `- Web 開發` |
+| `## GitHub` | 你的 GitHub 帳號 | `xiaoming-wang` |
+
+> **注意**：不要動 `#` 和 `##` 標題的文字，只改標題底下的內容。
+
+## 在卡片上放自己的圖片（選填）
+
+想讓你的卡片更有個人風格？你可以放一張圖片作為卡片上方的大頭照。
+
+1. 把圖片放到 `data/members/photos/` 資料夾
+2. 檔名必須跟你的 `.md` 檔相同，例如你的卡片是 `alice.md`，圖片就命名為 `alice.jpg`
+3. 支援格式：`.jpg`、`.png`、`.gif`、`.webp`、`.svg`
+4. 用 `git add` 把圖片加入版本控制，跟卡片一起 commit 並 push
+
+> 圖片會顯示在卡片的上半部。如果沒有放圖片，會顯示你選的 Emoji。
+
+## 小組資料檔格式
+
+檔案位置：`data/teams/team-<代號>/team.md`（由組長負責編輯）
 
 ```markdown
 # Team A
@@ -50,14 +80,6 @@ xiaoming-wang
 ## Team Name
 
 超級程式戰隊
-
-## Slogan
-
-Code like there's no tomorrow!
-
-## Introduction
-
-我們是一群熱愛寫程式的學生，這是我們第一次學 Git！
 
 ## Members
 
@@ -70,32 +92,37 @@ Code like there's no tomorrow!
 
 ## Branch 命名慣例
 
-建立 branch 時請遵循以下格式：
-
 ```
 feat/<描述>
 ```
 
 範例：
-- `feat/alice-profile` — 新增 Alice 的個人資料
-- `feat/team-info` — 編輯隊伍資訊
+- `feat/alice` — 新增 Alice 的卡片
+- `feat/team-a-info` — 編輯 Team A 的組名
 
 ## Commit Message 慣例
 
 一個好的 commit message 要能讓人**不看 diff 就知道你做了什麼**。
 
+格式建議使用 [Conventional Commits](https://www.conventionalcommits.org/zh-hant/v1.0.0/)：
+
+```
+<類型>: <簡短描述>
+```
+
+常用類型：
+- `feat`: 新增功能或內容（例如新增卡片）
+- `fix`: 修正錯誤
+- `docs`: 文件修改
+
 ### 好的範例
 
 ```
-Add Alice's profile
+feat: add Alice's profile card
 ```
 
 ```
-Update Team A slogan and introduction
-```
-
-```
-Add member list to Team A
+feat: update Team A name and member list
 ```
 
 ### 不好的範例
@@ -105,13 +132,10 @@ Add member list to Team A
 | `update` | 更新了什麼？每個 commit 都是 update |
 | `fix` | 修了什麼？ |
 | `done` | 什麼 done 了？ |
-| `final` | 真的是 final 嗎？ |
-| `真的final` | ... |
 | `aaa` | 你未來的自己會感謝你多打幾個字 |
-| `.` | 這不是 commit message |
 
 ### 原則
 
-1. **用英文**，以動詞原形開頭（`Add`、`Update`、`Fix`、`Remove`）
+1. **用英文**，以動詞原形開頭（`add`、`update`、`fix`、`remove`）
 2. **說明做了什麼**，不要只寫一個動詞
 3. **簡短但具體**，一行不超過 50 個字元

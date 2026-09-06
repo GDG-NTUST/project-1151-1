@@ -61,7 +61,7 @@ for (const letter of letters) {
 const allTeams = discoverTeams(dataDir);
 
 console.log('');
-console.log('=== 隊伍初始化完成 ===');
+console.log('=== 小組初始化完成 ===');
 console.log('');
 
 if (created.length > 0) {

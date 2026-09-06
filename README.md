@@ -1,6 +1,6 @@
-# GDG on Campus NTUST — Git 多人協作 Workshop
+# GDG on Campus NTUST — Git Workshop 卡片牆
 
-這是 GDG on Campus NTUST 舉辦的 Git 多人協作 workshop 種子專案。學員透過編輯 `data/` 底下的 Markdown 檔案來練習 Git 的基本操作與多人協作流程，每一次合併都會讓網站即時長出新的內容。
+這是 GDG on Campus NTUST 舉辦的 Git 多人協作 Workshop 種子專案。每位學員透過編輯 `data/` 底下的 Markdown 檔案來製作自己的個人卡片，練習 Git 的基本操作與多人協作流程。當所有人的卡片合併到主專案後，網頁上會出現一面精美的卡片牆。
 
 > **學員只需要編輯 `data/` 資料夾底下的 `.md` 檔案，不需要碰任何 HTML、CSS 或 JavaScript。**
 
@@ -8,7 +8,7 @@
 
 ```
 data/              ← 學員編輯的資料檔
-  members/         ← 個人資料（每人一個 .md）
+  members/         ← 個人卡片（每人一個 .md）
   teams/           ← 各組資料（每組一個資料夾）
 scripts/           ← 建置與驗證腳本
 site/              ← 網站模板與樣式
@@ -16,7 +16,9 @@ docs/              ← 教學文件
 .github/workflows/ ← CI/CD 自動化
 ```
 
-## 課前準備：初始化隊伍
+## 課前準備
+
+### 講師：初始化小組
 
 講師在課程當天依到場人數決定組數後執行：
 
@@ -32,22 +34,32 @@ node scripts/init-teams.mjs a b c d e
 
 ```bash
 git add data/teams/
-git commit -m "Initialize teams"
+git commit -m "feat: initialize teams"
 git push origin main
 ```
 
-GitHub Actions 會自動建置並部署到 GitHub Pages，投影幕上會出現對應數量的灰色卡片。
+GitHub Actions 會自動建置並部署到 GitHub Pages。
 
-> **重要：** 必須先完成隊伍初始化並 push，確認 GitHub Pages 更新後，才請各組組長 fork。否則組長的 fork 裡不會有隊伍資料夾。
+> **重要：** 必須先完成小組初始化並 push，確認 GitHub Pages 更新後，才請各組組長 fork。否則組長的 fork 裡不會有小組資料夾。
+
+### 學員：課前準備
+
+請參閱 **[課前準備指南](docs/pre-setup.md)**，確保以下工具在課程開始前已安裝並配置完成：
+
+- Git
+- GitHub 帳號
+- Visual Studio Code
+- Node.js（v20 以上）
 
 ## 組長操作流程
 
 1. **Fork** 這個 repository 到自己的帳號
-2. 在 fork 的 Settings → Pages 啟用 GitHub Pages（Source 選 GitHub Actions）
-3. 把組員加為 fork 的 **Collaborator**（Settings → Collaborators）
-4. 組員在組長的 fork 上開 branch、編輯檔案、發 PR
-5. 組長 Review 並 Merge 組員的 PR
-6. 全部完成後，組長從自己的 fork 發 PR 到上游的 `main`
+2. 進入 fork 的 **Actions** 頁面，點擊綠色按鈕同意啟用 Actions
+3. 在 fork 的 Settings → Pages 啟用 GitHub Pages（Source 選 GitHub Actions）
+4. 把組員加為 fork 的 **Collaborator**（Settings → Collaborators）
+5. 組員在組長的 fork 上開 branch、編輯卡片檔案、發 PR
+6. 組長 Review 並 Merge 組員的 PR
+7. 全部完成後，組長從自己的 fork 發 PR 到上游的 `main`
 
 ## 本機預覽
 
@@ -69,9 +81,9 @@ node scripts/validate.mjs
 
 ## 相關文件
 
+- [課前準備指南](docs/pre-setup.md) — 課前必須完成的安裝與配置
 - [學員指南](docs/workshop-guide.md) — 課程中跟著做的任務清單
-- [IDEA 操作指南](docs/idea-guide.md) — IntelliJ IDEA 的圖形化 Git 操作
-- [指令速查表](docs/cheatsheet.md) — 情境 → IDEA 操作 → CLI 指令 對照
-- [講師流程表](docs/instructor/run-of-show.md) — 90 分鐘時間表
-- [衝突腳本](docs/instructor/conflict-script.md) — 刻意製造衝突的教學劇本
+- [VS Code Git 速查表](docs/cheatsheet.md) — 情境 → VS Code 操作 → CLI 指令 對照
+- [講師流程表](docs/instructor/run-of-show.md) — 50 分鐘時間表
+- [衝突演練腳本](docs/instructor/conflict-script.md) — 刻意製造衝突的教學劇本（選用）
 - [貢獻指南](CONTRIBUTING.md) — 資料格式與 commit 規範

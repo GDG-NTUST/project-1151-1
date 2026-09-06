@@ -16,6 +16,8 @@ const warnings = [];
 function error(msg) { errors.push(msg); }
 function warn(msg) { warnings.push(msg); }
 
+const checkedFiles = new Set();
+
 function checkConflictMarkers(filePath) {
   if (checkedFiles.has(filePath)) return;
   checkedFiles.add(filePath);
@@ -38,7 +40,6 @@ const teams = discoverTeams(dataDir);
 const memberNamePattern = /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/;
 const memberToTeams = new Map();
 const referencedMembers = new Set();
-const checkedFiles = new Set();
 
 for (const teamFolder of teams) {
   const filePath = join(dataDir, 'teams', teamFolder, 'team.md');
@@ -56,36 +57,19 @@ for (const teamFolder of teams) {
 
   const { sections } = parseSections(text);
 
-  const requiredSections = ['Team Name', 'Slogan', 'Introduction', 'Members'];
+  const requiredSections = ['Team Name', 'Members'];
   for (const sec of requiredSections) {
     if (!sections.has(sec)) {
       error(`${filePath}：缺少必要區段「## ${sec}」`);
     }
   }
 
-  const hasNonTodoFields = [];
-  const hasTodoFields = [];
-  for (const sec of ['Team Name', 'Slogan', 'Introduction']) {
-    const val = sections.get(sec);
-    if (val !== undefined) {
-      if (isTodo(val)) {
-        hasTodoFields.push(sec);
-      } else {
-        hasNonTodoFields.push(sec);
-      }
-    }
-  }
-
-  if (hasNonTodoFields.length > 0 && hasTodoFields.length > 0) {
-    warn(`${filePath}（${display}）：已填寫 ${hasNonTodoFields.join('、')}，但 ${hasTodoFields.join('、')} 仍為 TODO`);
-  }
-
   const membersText = sections.get('Members');
   if (membersText && !isTodo(membersText)) {
     const memberList = parseMembers(membersText);
 
-    if (memberList.length > 0 && (memberList.length < 3 || memberList.length > 4)) {
-      warn(`${filePath}（${display}）：目前有 ${memberList.length} 位組員，建議每組 3 至 4 人，請確認是否正確`);
+    if (memberList.length > 0 && (memberList.length < 2 || memberList.length > 5)) {
+      warn(`${filePath}（${display}）：目前有 ${memberList.length} 位組員，建議每組 2 至 5 人，請確認是否正確`);
     }
 
     for (const name of memberList) {
@@ -117,7 +101,7 @@ for (const teamFolder of teams) {
 
 for (const [name, teamList] of memberToTeams) {
   if (teamList.length > 1) {
-    error(`成員「${name}」同時被列在 ${teamList.join(' 與 ')} 中，每位成員只能屬於一個隊伍`);
+    error(`成員「${name}」同時被列在 ${teamList.join(' 與 ')} 中，每位成員只能屬於一個小組`);
   }
 }
 
@@ -127,7 +111,7 @@ for (const name of allMembers) {
     error(`data/members/${name}.md：檔案名稱不符合命名規則（僅限小寫英文字母、數字與連字號，且必須以字母開頭）`);
   }
   if (!referencedMembers.has(name)) {
-    warn(`data/members/${name}.md：此成員檔案沒有被任何隊伍的 team.md 引用`);
+    warn(`data/members/${name}.md：此成員檔案沒有被任何小組的 team.md 引用`);
   }
   checkConflictMarkers(join(dataDir, 'members', `${name}.md`));
 }
